@@ -1,14 +1,15 @@
 {
-  "name": "react-scripts",
-  "version": "2.0.4",
+  "name": "react-custom-scripts",
+  "version": "0.0.1",
   "description": "Configuration and scripts for Create React App.",
   "repository": "facebook/create-react-app",
+  "homepage": "https://github.com/chenlong3/create-react-app",
   "license": "MIT",
   "engines": {
     "node": ">=6"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "email": "loong66666@gmail.com"
   },
   "files": [
     "bin",
