@@ -33,6 +33,21 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
+const alias = {
+  'react-native': 'react-native-web',
+}
+
+const testFolder = path.resolve(__dirname, '../src');
+const fs = require('fs');
+
+const files = fs.readdirSync(testFolder)
+files.forEach(file => {
+  const isDirectory = fs.lstatSync(path.resolve(testFolder, file)).isDirectory()
+  if (isDirectory) {
+    alias['@' + file] = path.resolve(testFolder, file)
+  }
+});
+
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -145,11 +160,7 @@ module.exports = {
     // `web` extension prefixes have been added for better support
     // for React Native Web.
     extensions: ['.mjs', '.web.js', '.js', '.json', '.web.jsx', '.jsx'],
-    alias: {
-      // Support React Native Web
-      // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web',
-    },
+    alias: alias,
     plugins: [
       // Adds support for installing with Plug'n'Play, leading to faster installs and adding
       // guards against forgotten dependencies and such.
