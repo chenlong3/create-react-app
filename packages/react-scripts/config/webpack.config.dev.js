@@ -37,7 +37,7 @@ const alias = {
   'react-native': 'react-native-web',
 }
 
-const testFolder = path.resolve(__dirname, '../src');
+const testFolder = paths.appSrc;
 const fs = require('fs');
 
 const files = fs.readdirSync(testFolder)
