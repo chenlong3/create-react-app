@@ -4,6 +4,8 @@
 
 Fork 自create-react-app react-scripts
 
+v0.1.0同步react-script2.1.1
+
 #### 新增特性
 
 + 增加环境变量DROP_CONSOLE,控制正式环境打包是否去除console
