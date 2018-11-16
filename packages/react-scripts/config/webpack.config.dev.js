@@ -28,6 +28,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 // @remove-on-eject-begin
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
+const unit = require('./unit')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -41,6 +42,10 @@ const env = getClientEnvironment(publicUrl);
 
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
+
+const alias = unit.getAlias(paths.appSrc, {
+  'react-native': 'react-native-web',
+})
 
 // style files regexes
 const cssRegex = /\.css$/;
@@ -161,6 +166,8 @@ module.exports = {
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
     },
+    extensions: ['.mjs', '.web.js', '.js', '.json', '.web.jsx', '.jsx'],
+    alias: alias,
     plugins: [
       // Adds support for installing with Plug'n'Play, leading to faster installs and adding
       // guards against forgotten dependencies and such.

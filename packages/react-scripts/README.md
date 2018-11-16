@@ -1,7 +1,12 @@
-# react-scripts
+# react-custom-scripts
 
-This package includes scripts and configuration used by [Create React App](https://github.com/facebook/create-react-app).<br>
-Please refer to its documentation:
+自定义react-scripts
 
-- [Getting Started](https://github.com/facebook/create-react-app/blob/master/README.md#getting-started) – How to create a new app.
-- [User Guide](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md) – How to develop apps bootstrapped with Create React App.
+Fork 自create-react-app react-scripts
+
+#### 新增特性
+
++ 增加环境变量DROP_CONSOLE,控制正式环境打包是否去除console
++ 将src目录文件夹,创建别名'@文件名'，如: http文件，别名@http。(webpack配置resolve.alias)
++ 增加环境变量SERVER_RENDER,控制是否进行服务端渲染，为true时使用服务端渲染，
+入口文件为src/server.js
