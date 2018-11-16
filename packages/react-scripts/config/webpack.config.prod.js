@@ -26,6 +26,7 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const unit = require('./unit')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -44,21 +45,9 @@ const publicUrl = publicPath.slice(0, -1);
 const env = getClientEnvironment(publicUrl);
 
 // 模块重命名
-const alias = {
+const alias = unit.getAlias(paths.appSrc, {
   'react-native': 'react-native-web',
-}
-
-const testFolder = paths.appSrc;
-const fs = require('fs');
-
-const files = fs.readdirSync(testFolder)
-files.forEach(file => {
-  const isDirectory = fs.lstatSync(path.resolve(testFolder, file)).isDirectory()
-  if (isDirectory) {
-    alias['@' + file] = path.resolve(testFolder, file)
-  }
-});
-
+})
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {

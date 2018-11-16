@@ -22,6 +22,7 @@ const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const unit = require('./unit')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -33,20 +34,9 @@ const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-const alias = {
+const alias = unit.getAlias(paths.appSrc, {
   'react-native': 'react-native-web',
-}
-
-const testFolder = paths.appSrc;
-const fs = require('fs');
-
-const files = fs.readdirSync(testFolder)
-files.forEach(file => {
-  const isDirectory = fs.lstatSync(path.resolve(testFolder, file)).isDirectory()
-  if (isDirectory) {
-    alias['@' + file] = path.resolve(testFolder, file)
-  }
-});
+})
 
 // style files regexes
 const cssRegex = /\.css$/;
