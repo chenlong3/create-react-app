@@ -23,6 +23,7 @@ function buildServer () {
         reject({
           message: '  Server Build failed with errors.\n'
         })
+        return
       }
       console.log('   服务端打包成功\n')
       resolve('Server 打包成功')

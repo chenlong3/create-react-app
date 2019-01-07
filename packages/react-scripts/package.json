@@ -1,6 +1,6 @@
 {
   "name": "react-custom-scripts",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Configuration and scripts for Create React App.",
   "repository": "facebook/create-react-app",
   "homepage": "https://github.com/chenlong3/create-react-app/tree/react-scripts",
@@ -49,12 +49,14 @@
     "file-loader": "2.0.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.0",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
-    "ignore-loader": "^0.1.2",   // +
+    "ignore-loader": "^0.1.2",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "markdown-loader": "^4.0.0",
     "mini-css-extract-plugin": "0.4.3",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
@@ -72,7 +74,7 @@
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.9",
     "webpack-manifest-plugin": "2.0.4",
-    "webpack-node-externals": "^1.7.2", // +
+    "webpack-node-externals": "^1.7.2",
     "workbox-webpack-plugin": "3.6.3"
   },
   "devDependencies": {

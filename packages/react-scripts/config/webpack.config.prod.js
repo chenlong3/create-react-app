@@ -297,6 +297,21 @@ module.exports = {
           // "url" loader works just like "file" loader but it also embeds
           // assets smaller than specified size as data URLs to avoid requests.
           {
+            test: /\.md$/,
+            use: [
+              {
+                loader: require.resolve("html-loader")
+              },
+              {
+                loader: require.resolve("markdown-loader"),
+                options: {
+                  pedantic: true,
+                  renderer: new require("marked").Renderer()
+                }
+              }
+            ]
+          },
+          {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),
             options: {
