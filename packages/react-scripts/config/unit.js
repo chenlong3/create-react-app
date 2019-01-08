@@ -16,6 +16,29 @@ function getAlias (folderSrc, defaultAlias) { // 获取src目录下所有文件�
   return alias
 }
 
+const marked = require("marked")
+const renderer = new marked.Renderer()
+
+function getMdLoader () {
+  'use strict'
+  return {
+    test: /\.md$/,
+    use: [
+      {
+        loader: require.resolve("html-loader")
+      },
+      {
+        loader: require.resolve("markdown-loader"),
+        options: {
+          pedantic: true,
+          renderer
+        }
+      }
+    ]
+  }
+}
+
 module.exports = {
-  getAlias: getAlias
+  getAlias: getAlias,
+  getMdLoader: getMdLoader
 }

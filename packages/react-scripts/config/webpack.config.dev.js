@@ -47,6 +47,8 @@ const alias = unit.getAlias(paths.appSrc, {
   'react-native': 'react-native-web',
 })
 
+const mdLoader = unit.getMdLoader()
+
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -184,18 +186,6 @@ module.exports = {
   module: {
     strictExportPresence: true,
     rules: [
-      // 添加markdown文档的支持
-      {
-        test: /\.md$/,
-        use: [
-          {
-            loader: require.resolve('markdown-loader'),
-            options: {
-              pedantic: true
-            }
-          }
-        ]
-      },
       // Disable require.ensure as it's not a standard language feature.
       { parser: { requireEnsure: false } },
       // First, run the linter.
@@ -230,21 +220,7 @@ module.exports = {
           // "url" loader works like "file" loader except that it embeds assets
           // smaller than specified limit in bytes as data URLs to avoid requests.
           // A missing `test` is equivalent to a match.
-          {
-            test: /\.md$/,
-            use: [
-              {
-                loader: require.resolve("html-loader")
-              },
-              {
-                loader: require.resolve("markdown-loader"),
-                options: {
-                  pedantic: true,
-                  renderer: new require("marked").Renderer()
-                }
-              }
-            ]
-          },
+          mdLoader,
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),

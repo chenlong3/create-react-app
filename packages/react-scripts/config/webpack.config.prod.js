@@ -57,6 +57,10 @@ const env = getClientEnvironment(publicUrl);
 const alias = unit.getAlias(paths.appSrc, {
   'react-native': 'react-native-web',
 })
+
+// md 文件loader
+const mdLoader = unit.getMdLoader()
+
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
@@ -296,21 +300,7 @@ module.exports = {
         oneOf: [
           // "url" loader works just like "file" loader but it also embeds
           // assets smaller than specified size as data URLs to avoid requests.
-          {
-            test: /\.md$/,
-            use: [
-              {
-                loader: require.resolve("html-loader")
-              },
-              {
-                loader: require.resolve("markdown-loader"),
-                options: {
-                  pedantic: true,
-                  renderer: new require("marked").Renderer()
-                }
-              }
-            ]
-          },
+          mdLoader,
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),

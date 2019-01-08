@@ -6,6 +6,8 @@ const unit = require('./unit')
 
 const alias = unit.getAlias(paths.appSrc)
 
+const mdLoader = unit.getMdLoader()
+
 module.exports = {
   mode: 'none',
   entry: paths.appServer,
@@ -21,21 +23,8 @@ module.exports = {
   externals: [nodeExternals()],
   module: {
     rules: [
-      {
-        test: /\.md$/,
-        use: [
-          {
-            loader: require.resolve("html-loader")
-          },
-          {
-            loader: require.resolve("markdown-loader"),
-            options: {
-              pedantic: true,
-              renderer: new require("marked").Renderer()
-            }
-          }
-        ]
-      },
+    // md 文件loader
+      mdLoader,
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg/],
         loader: 'url-loader',
