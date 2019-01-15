@@ -1,6 +1,6 @@
 {
   "name": "react-custom-scripts",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Configuration and scripts for Create React App.",
   "repository": "facebook/create-react-app",
   "homepage": "https://github.com/chenlong3/create-react-app/tree/react-scripts",
@@ -72,7 +72,7 @@
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
     "webpack": "4.19.1",
-    "webpack-dev-server": "3.1.9",
+    "webpack-dev-server": "^3.1.14",
     "webpack-manifest-plugin": "2.0.4",
     "webpack-node-externals": "^1.7.2",
     "workbox-webpack-plugin": "3.6.3"
