@@ -31,6 +31,10 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+
+const dropConsole = process.env.DROP_CONSOLE || false; // 添加环境变量，打包后是否去除console
+const unit = require('./unit'); // 自己添加的工具方法
+
 // @remove-on-eject-begin
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
@@ -43,6 +47,14 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
+
+// 文件导入时别名
+const alias = unit.getAlias(paths.appSrc, {
+  'react-native': 'react-native-web',
+});
+
+// md文件简析
+const mdLoader = unit.getMdLoader();
 
 // style files regexes
 const cssRegex = /\.css$/;
@@ -122,7 +134,7 @@ module.exports = function(webpackEnv) {
     }
     return loaders;
   };
-
+  console.log(213213123, paths);
   return {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
@@ -206,6 +218,7 @@ module.exports = function(webpackEnv) {
               // Pending futher investigation:
               // https://github.com/terser-js/terser/issues/120
               inline: 2,
+              drop_console: dropConsole,
             },
             mangle: {
               safari10: true,
@@ -271,11 +284,7 @@ module.exports = function(webpackEnv) {
       extensions: paths.moduleFileExtensions
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
-      alias: {
-        // Support React Native Web
-        // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-        'react-native': 'react-native-web',
-      },
+      alias: alias,
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
         // guards against forgotten dependencies and such.
@@ -298,6 +307,8 @@ module.exports = function(webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
+        // 新增md文件的loader
+        mdLoader,
         // Disable require.ensure as it's not a standard language feature.
         { parser: { requireEnsure: false } },
 
